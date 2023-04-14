@@ -26,19 +26,19 @@ void setup() {
 void loop() {
 for(Contador=0;Contador<10;Contador ++){
   digitalWrite(PinesEncender[Contador],HIGH);
-  delay(500);
+  delay(50);
   digitalWrite(PinesEncender[Contador + 1],HIGH);
-  delay(500);
+  delay(50);
   digitalWrite(PinesEncender[Contador],LOW);
-  delay(500);
+  delay(50);
 }
 for(Contador=11;Contador>0;Contador --){
   digitalWrite(PinesEncender[Contador],HIGH);
-  delay(500);
+  delay(50);
   digitalWrite(PinesEncender[Contador - 1],HIGH);
-  delay(500);
+  delay(50);
   digitalWrite(PinesEncender[Contador],LOW);
-  delay(500);
+  delay(50);
 }
   
 
