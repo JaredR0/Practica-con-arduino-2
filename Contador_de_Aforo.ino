@@ -56,7 +56,7 @@ void loop() {
      Serial.println(contador);
      Para_jalarNumero(contador);
  }
- if(contador >= 10){
+ if(contador >= 9){
   digitalWrite(rele,HIGH);
  }
 }
