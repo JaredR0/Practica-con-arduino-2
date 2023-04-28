@@ -7,7 +7,7 @@
    Curso: Taller de electronica digital y reparacion de computadoras I
    Proyecto: Contador de aforo 
    Nombre: Jared Hernan Ruiz Anleu
-   Fecha: 27/04/23
+   Fecha: 28/04/23
 */
 #include <LiquidCrystal.h>
 
