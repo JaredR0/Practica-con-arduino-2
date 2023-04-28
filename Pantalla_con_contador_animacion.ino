@@ -25,30 +25,40 @@
 #define BUZZER  11
 
 int contador = 0;
-int a=440;
+
 
 LiquidCrystal LCD_Jared(RS, E, D4, D5, D6, D7);
 
-byte SaltoArriba[] = {
+byte Goku[] = {
+  B00010,
   B01110,
-  B01110,
-  B01110,
-  B10101,
   B11111,
+  B00110,
+  B10101,
+  B01110,
   B00100,
-  B01010,
   B01010
 };
 
-byte SaltoAbajo[] = {
-  B01110,
-  B01110,
-  B01110,
-  B00100,
+byte Kameha[] = {
+  B00000,
+  B00000,
+  B01000,
+  B00110,
   B11111,
-  B10101,
-  B01010,
-  B10001
+  B00110,
+  B01000,
+  B00000
+};
+byte explocion[] = {
+  B01001,
+  B10110,
+  B01000,
+  B11011,
+  B00100,
+  B11110,
+  B01100,
+  B00011
 };
 
 void setup() {
@@ -57,8 +67,9 @@ void setup() {
   pinMode(receptor,INPUT);//definimos la variable receptro como una entrada
   pinMode(BUZZER,OUTPUT);
   LCD_Jared.begin(16,2);
-  LCD_Jared.createChar(1,SaltoArriba);
-  LCD_Jared.createChar(2,SaltoAbajo);
+  LCD_Jared.createChar(1,Goku);
+  LCD_Jared.createChar(2,Kameha);
+  LCD_Jared.createChar(3,explocion);
 }
 void loop() {
   
@@ -81,13 +92,26 @@ void loop() {
  if(contador >= 16){
    delay(100);
    LCD_Jared.clear();
-   LCD_Jared.setCursor(8,0);
+   LCD_Jared.setCursor(0,0);
    LCD_Jared.write(1);
-  delay(250);
-  LCD_Jared.setCursor(8,0);
-  LCD_Jared.write(2);
-  delay(250);
-  tone(BUZZER, a, 500);
+   LCD_Jared.setCursor(1,0);
+   LCD_Jared.write(2);
+   delay(250);
+   LCD_Jared.setCursor(2,0);
+   LCD_Jared.write(2);
+   delay(250);
+   LCD_Jared.setCursor(3,0);
+   LCD_Jared.write(2);
+   delay(250);
+   delay(250);
+   LCD_Jared.setCursor(4,0);
+   LCD_Jared.write(2);
+   delay(250);
+   delay(250);
+   LCD_Jared.setCursor(5,0);
+   LCD_Jared.write(3);
+   delay(250);
+   tone(BUZZER,1000);
    
  }
 
