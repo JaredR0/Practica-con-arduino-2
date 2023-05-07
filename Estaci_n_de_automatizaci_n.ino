@@ -20,24 +20,35 @@ OneWire ourWire(2);                   //Se establece el pin 2  como el pin que u
 DallasTemperature sensors(&ourWire); //Se declara una objeto para nuestro sensor
 LiquidCrystal_I2C lcd_JARED(0x27,16,2);
 
-#define Rojo  4
+#define Rojo  13
 #define Verde 5
 #define Azul  6
 
 #define radar 7
-#define led   13
+#define led   14
 
 #define BUZZER 11
-#define Servor 9
+#define servoMOTOR 9
 
-#define push3  12
+Servo Motor; 
 
-const int push1 = 8;   // Pin para el botón de encendido
-const int push2 = 10;  // Pin para el botón de apagado
-const int rele = 3; // Pin para el LED
-bool ledEncendido = false;
-bool estadoAnteriorPush1 = false;
-bool estadoAnteriorPush2 = false;
+int rele1 = 3;
+int rele2 = 4;
+int push1 = 8;
+int push2 = 10;
+int push3 = 12;
+
+int estadopush1 = 0;
+int estadoantes1 = 0;
+int estadorele1 = 0;
+
+int estadopush2 = 0;
+int estadoantes2 = 0;
+int estadorele2 = 0;
+
+int estadopush3 = 0;
+int estadoantes3 = 0;
+int estadorele3 = 0;
 
 byte Goku[] = {
   B00010,
@@ -128,6 +139,10 @@ void temperaturaMorado();
 
 void sensoradar(bool Detection);
 
+void boton1();
+void boton2();
+void boton3();
+
 void setup() {
   // Inicializar el LCD
   lcd_JARED.init();
@@ -147,18 +162,21 @@ void setup() {
   lcd_JARED.createChar(6,bola);
   lcd_JARED.createChar(7,hielo);
   lcd_JARED.createChar(8,congelado);
-  
+
+  Motor.attach(servoMOTOR);
+
   pinMode(4,OUTPUT);
   pinMode(5,OUTPUT);
   pinMode(6,OUTPUT);
-  pinMode(Servor, OUTPUT);
+  pinMode(9, OUTPUT);
   pinMode(3,OUTPUT);
-  pinMode(radar,INPUT);
+  pinMode(7,INPUT);
   pinMode(13,OUTPUT);
   pinMode(8,INPUT);
   pinMode(10,INPUT);
+  pinMode(11,OUTPUT);
   pinMode(12,INPUT);
-
+  pinMode(14,OUTPUT);
 }
  
 void loop() {
@@ -168,36 +186,17 @@ void loop() {
   Serial.print("Temperatura= ");
   Serial.print(temp);
   Serial.println(" C");
-
-  if (digitalRead(push1) == HIGH && estadoAnteriorPush1 == LOW) {
-    ledEncendido = !ledEncendido;
-    estadoAnteriorPush1 = HIGH;   
-    delay(10);                     
-  }
-  // Detectar el flanco de subida del botón de apagado
-  if (digitalRead(push2) == HIGH && estadoAnteriorPush2 == LOW) {
-    ledEncendido = false;         
-    estadoAnteriorPush2 = HIGH;    
-    delay(10);                     
-  }
-
-  // Actualizar el estado anterior de los botones
-  estadoAnteriorPush1 = digitalRead(push1);
-  estadoAnteriorPush2 = digitalRead(push2);
-
-  // Controlar el LED
-  if (ledEncendido) {
-    digitalWrite(rele, HIGH);   // Encender el rele para luces 
-    Serial.println("LED encendido");
-  } else {
-    digitalWrite(rele, LOW);    // Apagar el rele para luces
-    Serial.println("LED apagado");
-  }
   
   temperaturaVerde();
   temperaturaRojo();
   temperaturaMorado();
   sensoradar(Detection);
+  
+  boton1();
+  
+  boton2();
+  
+  boton3();
 }
 
 void temperaturaVerde(){
@@ -313,6 +312,8 @@ void temperaturaMorado(){
     digitalWrite(led,HIGH);
     tone(BUZZER,1500);
    lcd_JARED.clear();
+   lcd_JARED.setCursor(0,1);
+   lcd_JARED.print("hay alguien");
    lcd_JARED.setCursor(0,0);
    lcd_JARED.write(7);
    lcd_JARED.setCursor(15,0);
@@ -348,4 +349,63 @@ void temperaturaMorado(){
     digitalWrite(led,LOW);
     noTone(BUZZER);
   }
+  }
+  void boton1(){
+  estadopush1 = digitalRead(push1);
+   if((estadopush1 == 1) && (estadoantes1 == 0)){
+    estadorele1 = !estadorele1;
+    delay(100);
+   }
+   estadoantes1 = estadopush1;
+
+   if(estadorele1 == 1){
+    lcd_JARED.clear();
+    lcd_JARED.setCursor(0,0);
+    lcd_JARED.print("luz 1 encendida");
+    digitalWrite(rele1, HIGH);
+   }
+   else {
+    lcd_JARED.clear();
+    lcd_JARED.setCursor(0,0);
+    lcd_JARED.print("luz 1 apagada");
+    digitalWrite(rele1,LOW);
+   }
+  }
+  void boton2(){
+  estadopush2 = digitalRead(push2);
+   if((estadopush2 == 1) && (estadoantes2 == 0)){
+    estadorele2 = !estadorele2;
+    delay(100);
+   }
+   estadoantes2 = estadopush2;
+
+   if(estadorele2 == 1){
+    lcd_JARED.clear();
+    lcd_JARED.setCursor(0,1);
+    lcd_JARED.print("luz 2 encendida");
+    digitalWrite(rele2, HIGH);
+   }
+   else {
+    lcd_JARED.clear();
+    lcd_JARED.setCursor(0,1);
+    lcd_JARED.print("luz 2 apagada");
+    digitalWrite(rele2,LOW);
+   }
+  }
+  void boton3(){
+   estadopush3 = digitalRead(push3);
+   if((estadopush3 == 1) && (estadoantes3 == 0)){
+    estadorele3 = !estadorele3;
+    delay(100);
+   }
+   estadoantes3 = estadopush3;
+
+   if(estadorele3 == 1){
+    Motor.write(45); 
+     delay(500);
+   }
+   else {
+     Motor.write(180);
+     delay(500);
+   }
   }
