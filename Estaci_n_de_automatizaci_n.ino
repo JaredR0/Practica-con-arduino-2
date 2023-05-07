@@ -25,7 +25,6 @@ LiquidCrystal_I2C lcd_JARED(0x27,16,2);
 #define Azul  6
 
 #define radar 7
-#define led   14
 
 #define BUZZER 11
 #define servoMOTOR 9
@@ -49,6 +48,11 @@ int estadorele2 = 0;
 int estadopush3 = 0;
 int estadoantes3 = 0;
 int estadorele3 = 0;
+
+#define PIN 14           // Pin digital utilizado para controlar la rueda de Neopixels
+#define NUM_LEDS 7      // Número de Neopixels en la rueda
+
+Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUM_LEDS, PIN, NEO_GRB + NEO_KHZ800);
 
 byte Goku[] = {
   B00010,
@@ -131,6 +135,16 @@ byte congelado[] = {
   B01110,
   B01010
 };
+byte foco[] = {
+  B01110,
+  B10001,
+  B10001,
+  B10001,
+  B10001,
+  B01110,
+  B01110,
+  B00100
+};
 
 float temp;
 void temperaturaVerde();
@@ -148,6 +162,9 @@ void setup() {
   lcd_JARED.init();
   //Encender la luz de fondo.
   lcd_JARED.backlight();
+
+  pixels.begin();                 // Inicializa la comunicación con los Neopixels
+  pixels.setBrightness(50);       // Configura el brillo de los Neopixels (0-255)
   
   delay(100);
   Serial.begin(9600);   //Inicio la comunicacion serial
@@ -162,6 +179,7 @@ void setup() {
   lcd_JARED.createChar(6,bola);
   lcd_JARED.createChar(7,hielo);
   lcd_JARED.createChar(8,congelado);
+  lcd_JARED.createChar(9,foco);
 
   Motor.attach(servoMOTOR);
 
@@ -177,6 +195,7 @@ void setup() {
   pinMode(11,OUTPUT);
   pinMode(12,INPUT);
   pinMode(14,OUTPUT);
+
 }
  
 void loop() {
@@ -309,10 +328,21 @@ void temperaturaMorado(){
   }
   void sensoradar(bool Detection){
     if(Detection == HIGH){
-    digitalWrite(led,HIGH);
+    for (int i = 0; i < NUM_LEDS; i++) {
+    pixels.setPixelColor(i, pixels.Color(255, 0, 255));  
+    pixels.show();                                     
+    delay(100);                                        
+  }
+    for (int i = 0; i < NUM_LEDS; i++) {
+    pixels.setPixelColor(i, pixels.Color(0, 225, 189));  // Establece el color del Neopixel en rojo
+    pixels.show();
+    delay(100);
+    }
     tone(BUZZER,1500);
+ 
+   delay(100);
    lcd_JARED.clear();
-   lcd_JARED.setCursor(0,1);
+   lcd_JARED.setCursor(2,1);
    lcd_JARED.print("hay alguien");
    lcd_JARED.setCursor(0,0);
    lcd_JARED.write(7);
@@ -343,10 +373,14 @@ void temperaturaMorado(){
    lcd_JARED.write(8);
    lcd_JARED.setCursor(8,0);
    lcd_JARED.write(8);
-   delay(250);
+   delay(100);
     }
     if(Detection == LOW){
-    digitalWrite(led,LOW);
+      for (int i = NUM_LEDS - 1; i >= 0; i--) {
+    pixels.setPixelColor(i, pixels.Color(0, 0, 0));  // Apaga el Neopixel
+    pixels.show();                                  // Actualiza la rueda de Neopixels
+    delay(100);                                     // Espera 100 milisegundos
+  }
     noTone(BUZZER);
   }
   }
@@ -354,20 +388,24 @@ void temperaturaMorado(){
   estadopush1 = digitalRead(push1);
    if((estadopush1 == 1) && (estadoantes1 == 0)){
     estadorele1 = !estadorele1;
-    delay(100);
+    delay(50);
    }
    estadoantes1 = estadopush1;
 
    if(estadorele1 == 1){
     lcd_JARED.clear();
     lcd_JARED.setCursor(0,0);
-    lcd_JARED.print("luz 1 encendida");
+    lcd_JARED.print("1 ON");
+    lcd_JARED.setCursor(4,0);
+    lcd_JARED.write(9);
     digitalWrite(rele1, HIGH);
    }
    else {
     lcd_JARED.clear();
     lcd_JARED.setCursor(0,0);
-    lcd_JARED.print("luz 1 apagada");
+    lcd_JARED.print("1 OFF");
+    lcd_JARED.setCursor(5,0);
+    lcd_JARED.write(9);
     digitalWrite(rele1,LOW);
    }
   }
@@ -375,20 +413,22 @@ void temperaturaMorado(){
   estadopush2 = digitalRead(push2);
    if((estadopush2 == 1) && (estadoantes2 == 0)){
     estadorele2 = !estadorele2;
-    delay(100);
+    delay(50);
    }
    estadoantes2 = estadopush2;
 
    if(estadorele2 == 1){
-    lcd_JARED.clear();
-    lcd_JARED.setCursor(0,1);
-    lcd_JARED.print("luz 2 encendida");
+    lcd_JARED.setCursor(7,0);
+    lcd_JARED.print("2 ON");
+    lcd_JARED.setCursor(11,0);
+    lcd_JARED.write(9);
     digitalWrite(rele2, HIGH);
    }
    else {
-    lcd_JARED.clear();
-    lcd_JARED.setCursor(0,1);
-    lcd_JARED.print("luz 2 apagada");
+    lcd_JARED.setCursor(7,0);
+    lcd_JARED.print("2 OFF");
+    lcd_JARED.setCursor(12,0);
+    lcd_JARED.write(9);
     digitalWrite(rele2,LOW);
    }
   }
@@ -396,15 +436,25 @@ void temperaturaMorado(){
    estadopush3 = digitalRead(push3);
    if((estadopush3 == 1) && (estadoantes3 == 0)){
     estadorele3 = !estadorele3;
-    delay(100);
+    delay(50);
    }
    estadoantes3 = estadopush3;
 
    if(estadorele3 == 1){
+    lcd_JARED.setCursor(0,1);
+    lcd_JARED.print("puerta abierta");
+    lcd_JARED.setCursor(14,1);
+    lcd_JARED.write(8);
     Motor.write(45); 
      delay(500);
    }
    else {
+    lcd_JARED.setCursor(0,1);
+    lcd_JARED.print("puerta cerrada");
+    lcd_JARED.setCursor(14,1);
+    lcd_JARED.write(8);
+    lcd_JARED.setCursor(15,1);
+    lcd_JARED.write(7);
      Motor.write(180);
      delay(500);
    }
