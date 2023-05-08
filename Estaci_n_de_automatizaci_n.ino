@@ -7,7 +7,7 @@
    Curso: Taller de electronica digital y reparacion de computadoras I
    Proyecto: Estacion  de automatizacion
    Nombre: Jared Hernan Ruiz Anleu
-   Fecha: 4/05/23
+   Fecha: 8/05/23
 */
 #include <Wire.h> 
 #include <Adafruit_NeoPixel.h>
@@ -54,47 +54,6 @@ int estadorele3 = 0;
 
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUM_LEDS, PIN, NEO_GRB + NEO_KHZ800);
 
-byte Goku[] = {
-  B00010,
-  B01110,
-  B11111,
-  B00110,
-  B10101,
-  B01110,
-  B00100,
-  B01010
-};
-
-byte Kameha[] = {
-  B00000,
-  B00000,
-  B01000,
-  B00110,
-  B11111,
-  B00110,
-  B01000,
-  B00000
-};
-byte explocion[] = {
-  B01001,
-  B10110,
-  B01000,
-  B11011,
-  B00100,
-  B11110,
-  B01100,
-  B00011
-};
-byte llamas[] = {
-  B10101,
-  B00100,
-  B10010,
-  B01111,
-  B11110,
-  B11110,
-  B11100,
-  B11000
-};
 byte llamas2[] = {
   B10101,
   B00100,
@@ -170,11 +129,6 @@ void setup() {
   Serial.begin(9600);   //Inicio la comunicacion serial
   sensors.begin();   //Se inicia el sensor
   delay(100);
-  
-  lcd_JARED.createChar(1,Goku);
-  lcd_JARED.createChar(2,Kameha);
-  lcd_JARED.createChar(3,explocion);
-  lcd_JARED.createChar(4,llamas);
   lcd_JARED.createChar(5,llamas2);
   lcd_JARED.createChar(6,bola);
   lcd_JARED.createChar(7,hielo);
