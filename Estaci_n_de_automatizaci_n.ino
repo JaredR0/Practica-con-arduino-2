@@ -7,7 +7,7 @@
    Curso: Taller de electronica digital y reparacion de computadoras I
    Proyecto: Estacion  de automatizacion
    Nombre: Jared Hernan Ruiz Anleu
-   Fecha: 8/05/23
+   Fecha: 4/05/23
 */
 #include <Wire.h> 
 #include <Adafruit_NeoPixel.h>
@@ -55,14 +55,14 @@ int estadorele3 = 0;
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUM_LEDS, PIN, NEO_GRB + NEO_KHZ800);
 
 byte llamas2[] = {
-  B10101,
-  B00100,
   B01000,
-  B11110,
-  B01111,
-  B01111,
-  B00111,
-  B00011
+  B00100,
+  B01010,
+  B10010,
+  B10001,
+  B01110,
+  B00000,
+  B11111
 };
 byte hielo[] = {
   B00000,
@@ -76,13 +76,13 @@ byte hielo[] = {
 };
 byte bola[] = {
   B00000,
-  B00000,
-  B00100,
   B10010,
-  B01010,
+  B01001,
   B10010,
-  B00100,
-  B00000
+  B01001,
+  B10010,
+  B01001,
+  B11111
 };
 byte congelado[] = {
   B01110,
@@ -177,7 +177,7 @@ if(temp > 21 && temp < 25){
    lcd_JARED.setCursor(0,0);
    lcd_JARED.print("Temp");
    lcd_JARED.setCursor(4,0);
-   lcd_JARED.write(5);
+   lcd_JARED.write(6);
    digitalWrite(Verde, HIGH);
    digitalWrite(Rojo,LOW);
    digitalWrite(Azul,LOW);
@@ -188,7 +188,7 @@ void temperaturaRojo(){
    lcd_JARED.setCursor(0,0);
    lcd_JARED.print("Temp");
    lcd_JARED.setCursor(4,0);
-   lcd_JARED.write(6);
+   lcd_JARED.write(5);
    digitalWrite(Rojo,HIGH);
    digitalWrite(Verde,LOW);
    digitalWrite(Azul,LOW);
