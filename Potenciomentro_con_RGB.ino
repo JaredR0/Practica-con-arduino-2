@@ -7,7 +7,7 @@
  * Curso: Taller de electronica digital y reparación de computadoras I
  * Nombre: Jared Hernan Ruiz Aleu 
  * Carnet: 2022011
- * Proyecto: Uso de interrupciones de temporizador por medio de Ticker con el sensor DS18B20
+ * RGB con potenciometro 
 */
 #define POT  A0
 #define Rojo   3
