@@ -1,3 +1,15 @@
+/*
+ * Fundacion Kinal
+ * Centro educativo tecnico laboral Kinal
+ * Electronica
+ * Grado: Quinto
+ * Sección: A
+ * Curso: Taller de electronica digital y reparación de computadoras I
+ * Nombre: Jared Hernan Ruiz Aleu 
+ * Carnet: 2022011
+ * Tarea Motor Stepper
+*/
+
 #define Push1 2
 #define Push2 3
 #define Push3 4
