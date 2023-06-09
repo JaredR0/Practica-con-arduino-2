@@ -5,7 +5,7 @@
  * Grado: Quinto
  * Sección: A
  * Curso: Taller de electronica digital y reparación de computadoras I
- * Nombre: Jared Hernan Ruiz Aleu 
+ * Nombre: Jared Hernan Ruiz Anleu 
  * Carnet: 2022011
  * Tarea Motor Stepper
 */
