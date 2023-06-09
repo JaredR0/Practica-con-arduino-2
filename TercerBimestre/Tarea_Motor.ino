@@ -10,7 +10,6 @@
 #define vel2 9
 #define vel3 10
 #define vel4 11
-int tiempo = 75;
 
 void Primer_fun();
 void Segunda_fun();
@@ -47,32 +46,33 @@ void loop() {
 
 void Primer_fun() {
   int est1 = digitalRead(Push1);
-  if (est1 == HIGH) {
+  int est3 = digitalRead(Push3);
+  if (est1 == HIGH && est3 == LOW ) {
     digitalWrite(LeG, HIGH);
 
     digitalWrite(vel1, LOW);
     digitalWrite(vel2, LOW);
     digitalWrite(vel3, LOW);
     digitalWrite(vel4, HIGH); 
-    delay(tiempo);
+    delay(500);
 
     digitalWrite(vel1, LOW);
     digitalWrite(vel2, LOW);
     digitalWrite(vel3, HIGH);
     digitalWrite(vel4, LOW); 
-    delay(tiempo);
+    delay(500);
 
     digitalWrite(vel1, LOW);
     digitalWrite(vel2, HIGH);
     digitalWrite(vel3, LOW);
     digitalWrite(vel4, LOW); 
-    delay(tiempo);
+    delay(500);
 
     digitalWrite(vel1, HIGH);
     digitalWrite(vel2, LOW);
     digitalWrite(vel3, LOW);
     digitalWrite(vel4, LOW); 
-    delay(tiempo);
+    delay(500);
   }
   else {
     digitalWrite(LeG, LOW);
@@ -86,32 +86,33 @@ void Primer_fun() {
 
 void Segunda_fun() {
   int est2 = digitalRead(Push2);
-  if (est2 == HIGH) {
+  int est3 = digitalRead(Push3);
+  if (est2 == HIGH && est3 == LOW) {
     digitalWrite(LeY, HIGH);
     
     digitalWrite(vel1, HIGH);
     digitalWrite(vel2, LOW);
     digitalWrite(vel3, LOW);
     digitalWrite(vel4, LOW); 
-    delay(tiempo);
+    delay(500);
 
     digitalWrite(vel1, LOW);
     digitalWrite(vel2, HIGH);
     digitalWrite(vel3, LOW);
     digitalWrite(vel4, LOW); 
-    delay(tiempo);
+    delay(500);
 
     digitalWrite(vel1, LOW);
     digitalWrite(vel2, LOW);
     digitalWrite(vel3, HIGH);
     digitalWrite(vel4, LOW); 
-    delay(tiempo);
+    delay(500);
 
     digitalWrite(vel1, LOW);
     digitalWrite(vel2, LOW);
     digitalWrite(vel3, LOW);
     digitalWrite(vel4, HIGH); 
-    delay(tiempo);
+    delay(500);
   }
   else {
     digitalWrite(LeY, LOW);
@@ -127,6 +128,7 @@ void Tercera_fun() {
   int est1 = digitalRead(Push1);
   int est2 = digitalRead(Push2);
   int est3 = digitalRead(Push3);
+  
   if (est3 && est2 == HIGH) {
     digitalWrite(LeR, HIGH);
     digitalWrite(LeY, LOW);
@@ -135,25 +137,25 @@ void Tercera_fun() {
     digitalWrite(vel2, LOW);
     digitalWrite(vel3, LOW);
     digitalWrite(vel4, LOW); 
-    delay(tiempo*2);
+    delay(250);
 
     digitalWrite(vel1, LOW);
     digitalWrite(vel2, HIGH);
     digitalWrite(vel3, LOW);
     digitalWrite(vel4, LOW); 
-    delay(tiempo*2);
+    delay(250);
 
     digitalWrite(vel1, LOW);
     digitalWrite(vel2, LOW);
     digitalWrite(vel3, HIGH);
     digitalWrite(vel4, LOW); 
-    delay(tiempo*2);
+    delay(250);
 
     digitalWrite(vel1, LOW);
     digitalWrite(vel2, LOW);
     digitalWrite(vel3, LOW);
     digitalWrite(vel4, HIGH); 
-    delay(tiempo*2);
+    delay(250);
 
     // Apagar los otros LEDs
     digitalWrite(LeG, LOW);
@@ -173,6 +175,7 @@ void Cuarta_fun() {
   int est1 = digitalRead(Push1);
   int est2 = digitalRead(Push2);
   int est3 = digitalRead(Push3);
+  
   if (est3 && est1 == HIGH) {
     digitalWrite(LeR, HIGH);
     digitalWrite(LeG, LOW);
@@ -181,25 +184,25 @@ void Cuarta_fun() {
     digitalWrite(vel2, LOW);
     digitalWrite(vel3, LOW);
     digitalWrite(vel4, HIGH); 
-    delay(tiempo*2);
+    delay(250);
 
     digitalWrite(vel1, LOW);
     digitalWrite(vel2, LOW);
     digitalWrite(vel3, HIGH);
     digitalWrite(vel4, LOW); 
-    delay(tiempo*2);
+    delay(250);
 
     digitalWrite(vel1, LOW);
     digitalWrite(vel2, HIGH);
     digitalWrite(vel3, LOW);
     digitalWrite(vel4, LOW); 
-    delay(tiempo*2);
+    delay(250);
 
     digitalWrite(vel1, HIGH);
     digitalWrite(vel2, LOW);
     digitalWrite(vel3, LOW);
     digitalWrite(vel4, LOW); 
-    delay(tiempo*2);
+    delay(250);
 
     // Apagar los otros LEDs
     digitalWrite(LeY, LOW);
