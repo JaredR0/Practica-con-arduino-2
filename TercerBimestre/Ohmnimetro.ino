@@ -14,13 +14,13 @@
 
 LiquidCrystal_I2C lcd_JARED(0x27,16,2);
 
-int analogPin = 0;
-int raw = 0;
-int Vin = 5;
+int   PIN = 0;
+int   Medidor = 0;
+int   Vin = 5;
 float Vout = 0;
-float R1 = 10000;
-float R2 = 0;
-float buffer = 0;
+float R2 = 10000;
+float R1 = 0;
+float Const = 0;
 
 void setup(){
   // Inicializar el LCD
@@ -30,17 +30,22 @@ void setup(){
 }
 
 void loop(){
-  raw = analogRead(analogPin);
-  if(raw){
-    buffer = raw * Vin;
-    Vout = (buffer)/1024.0;
-    buffer = (Vin/Vout) - 1;
-    R2 = R1 * buffer;
+  Medidor = analogRead(PIN);
+  if(Medidor){
+    Const = Medidor * Vin;
+    Vout = (Const)/1024.0;
+    Const = (Vin/Vout) - 1;
+    R1 = R2 * Const;
 
-    lcd_JARED.setCursor(0,0);
-    lcd_JARED.print("Resistencia");
     lcd_JARED.setCursor(0,1);
-    lcd_JARED.print(R2);
+    lcd_JARED.print("R1=");
+    lcd_JARED.setCursor(3,1);
+    lcd_JARED.print(R1);
+    lcd_JARED.setCursor(0,0);
+    lcd_JARED.print("Vout=");
+    lcd_JARED.setCursor(5,0);
+    lcd_JARED.print(Vout);
+    
     delay(500);
   }
 }
