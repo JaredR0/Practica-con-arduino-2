@@ -54,25 +54,25 @@ void Primer_fun() {
     digitalWrite(vel2, LOW);
     digitalWrite(vel3, LOW);
     digitalWrite(vel4, HIGH); 
-    delay(500);
+    delay(250);
 
     digitalWrite(vel1, LOW);
     digitalWrite(vel2, LOW);
     digitalWrite(vel3, HIGH);
     digitalWrite(vel4, LOW); 
-    delay(500);
+    delay(250);
 
     digitalWrite(vel1, LOW);
     digitalWrite(vel2, HIGH);
     digitalWrite(vel3, LOW);
     digitalWrite(vel4, LOW); 
-    delay(500);
+    delay(250);
 
     digitalWrite(vel1, HIGH);
     digitalWrite(vel2, LOW);
     digitalWrite(vel3, LOW);
     digitalWrite(vel4, LOW); 
-    delay(500);
+    delay(250);
   }
   else {
     digitalWrite(LeG, LOW);
@@ -94,25 +94,25 @@ void Segunda_fun() {
     digitalWrite(vel2, LOW);
     digitalWrite(vel3, LOW);
     digitalWrite(vel4, LOW); 
-    delay(500);
+    delay(250);
 
     digitalWrite(vel1, LOW);
     digitalWrite(vel2, HIGH);
     digitalWrite(vel3, LOW);
     digitalWrite(vel4, LOW); 
-    delay(500);
+    delay(250);
 
     digitalWrite(vel1, LOW);
     digitalWrite(vel2, LOW);
     digitalWrite(vel3, HIGH);
     digitalWrite(vel4, LOW); 
-    delay(500);
+    delay(250);
 
     digitalWrite(vel1, LOW);
     digitalWrite(vel2, LOW);
     digitalWrite(vel3, LOW);
     digitalWrite(vel4, HIGH); 
-    delay(500);
+    delay(250);
   }
   else {
     digitalWrite(LeY, LOW);
@@ -137,29 +137,25 @@ void Tercera_fun() {
     digitalWrite(vel2, LOW);
     digitalWrite(vel3, LOW);
     digitalWrite(vel4, LOW); 
-    delay(250);
+    delay(125);
 
     digitalWrite(vel1, LOW);
     digitalWrite(vel2, HIGH);
     digitalWrite(vel3, LOW);
     digitalWrite(vel4, LOW); 
-    delay(250);
+    delay(125);
 
     digitalWrite(vel1, LOW);
     digitalWrite(vel2, LOW);
     digitalWrite(vel3, HIGH);
     digitalWrite(vel4, LOW); 
-    delay(250);
+    delay(125);
 
     digitalWrite(vel1, LOW);
     digitalWrite(vel2, LOW);
     digitalWrite(vel3, LOW);
     digitalWrite(vel4, HIGH); 
-    delay(250);
-
-    // Apagar los otros LEDs
-    digitalWrite(LeG, LOW);
-    digitalWrite(LeY, LOW);
+    delay(125);
   }
   else {
     digitalWrite(LeR, LOW);
@@ -184,28 +180,25 @@ void Cuarta_fun() {
     digitalWrite(vel2, LOW);
     digitalWrite(vel3, LOW);
     digitalWrite(vel4, HIGH); 
-    delay(250);
+    delay(125);
 
     digitalWrite(vel1, LOW);
     digitalWrite(vel2, LOW);
     digitalWrite(vel3, HIGH);
     digitalWrite(vel4, LOW); 
-    delay(250);
+    delay(125);
 
     digitalWrite(vel1, LOW);
     digitalWrite(vel2, HIGH);
     digitalWrite(vel3, LOW);
     digitalWrite(vel4, LOW); 
-    delay(250);
+    delay(125);
 
     digitalWrite(vel1, HIGH);
     digitalWrite(vel2, LOW);
     digitalWrite(vel3, LOW);
     digitalWrite(vel4, LOW); 
-    delay(250);
-
-    // Apagar los otros LEDs
-    digitalWrite(LeY, LOW);
+    delay(125);
   }
   else {
     digitalWrite(LeR, LOW);
