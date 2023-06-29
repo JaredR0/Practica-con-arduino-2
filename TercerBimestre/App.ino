@@ -8,7 +8,7 @@
  * Taller de electronica digital y reparacion de computadoras
  * Nombre: Jared Hernan Ruiz Anleu
  * Carne: 2022011
- * Fecha: 1/05/2023
+ * Fecha: 29/06/2023
  * Proyecto: Sensor de Temperatura DS18B20
  */
  
