@@ -1,3 +1,14 @@
+/*
+ * Fundacion Kinal
+ * Centro educativo tecnico laboral Kinal
+ * Electronica
+ * Grado: Quinto
+ * Sección: A
+ * Curso: Taller de electronica digital y reparación de computadoras I
+ * Nombre: Jared Hernan Ruiz Anleu 
+ * Carnet: 2022011
+ * Tarea Sensor de Gas con Matriz led 
+*/
 #include <LedControl.h>
 #include <Ticker.h>
 
