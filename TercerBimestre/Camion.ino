@@ -68,24 +68,18 @@ void loop() {
         noventa_Grados();
         break;
         case '7':
-        noventa_Grados();
+        ciento_ochenta_Grados();
         break;
         case '9':
         FAROS();
         break;
         case 'A':
-        FAROS();
+        FAROSNO();
         break;
         case 'B':
-        PIDENO();
-        break;
-        case 'C':
-        PIDENO1();
-        break;
-        case 'D':
         BOCINA();
         break;
-        case 'E':
+        case 'C':
         BOCINANO();
         break;
     }
@@ -168,12 +162,6 @@ void FAROS(){
 }
 void FAROSNO(){
   digitalWrite(led3,LOW);
-}
-void PIDENO(){
-  digitalWrite(led1,LOW);
-}
-void PIDENO1(){
-  digitalWrite(led2,LOW);
 }
 void BOCINA(){
   buzzer();
