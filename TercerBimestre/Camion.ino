@@ -3,11 +3,6 @@
 
 SoftwareSerial bluetooth(7, 8);  // Pines RX, TX del módulo Bluetooth HC-05
 
-#define NOTE_C4 261
-#define NOTE_E4 330
-#define NOTE_G4 392
-#define NOTE_A4 440
-
 // Pines de control del carro
 const int motor1Pin1 = 2;
 const int motor1Pin2 = 3;
@@ -20,12 +15,20 @@ const int BUZZER = 11;
 const int buzzerPin = 14;
 Servo myservo;
 
-int melody[] = {
-  NOTE_C4, NOTE_E4, NOTE_G4, NOTE_A4, NOTE_G4, NOTE_E4
-};
-int noteDurations[] = {
-  4, 4, 4, 2, 4, 4
-};
+int Do = 261;
+int Re = 293;
+int Mi = 329;
+int Fa = 349;
+int Sol = 391;
+int La = 440;
+int Si = 493;
+int DoS = 277;
+int ReS = 311;
+
+int t1 = 200;
+int t2 = 100;
+int t3 = 50;
+int volume = 700;
 
 void setup() {
   // Configurar los pines de control del carro como salida
@@ -43,6 +46,14 @@ void setup() {
  bluetooth.begin(9600);  // Iniciar la comunicación Bluetooth a 9600 bps
 }
 
+void playNote(int note, int duration) {
+  analogWrite(11, volume); // Configura el ciclo de trabajo PWM (volumen)
+  tone(11, note, duration);
+  delay(duration + 50); // Pequeña pausa entre notas
+  noTone(11);
+  delay(t3); // Pausa entre repeticiones de la melodía
+}
+
 void loop() {
   if (bluetooth.available()) {
     char command = bluetooth.read();  // Leer el comando recibido por Bluetooth
@@ -57,6 +68,8 @@ void loop() {
         break;
         case '3':
         stop1();
+        pide_vias_D();
+        pide_vias_I();
         break;
         case '4':
         pide_vias_D();
@@ -78,9 +91,6 @@ void loop() {
         break;
         case 'B':
         BOCINA();
-        break;
-        case 'C':
-        BOCINANO();
         break;
     }
   }
@@ -108,54 +118,53 @@ void stop1() {
   digitalWrite(motor1Pin2, LOW);
   digitalWrite(motor2Pin1, LOW);
   digitalWrite(motor2Pin2, LOW);
-  digitalWrite(led1, LOW);
-  digitalWrite(led2, LOW);
-  digitalWrite(led3, LOW);
   digitalWrite(buzzerPin, LOW);
 }
 void pide_vias_D() {
   digitalWrite(led1,HIGH);
-  delay(50);
+  delay(150);
   digitalWrite(led1,LOW);
-  delay(50);
+  delay(150);
   digitalWrite(led1,HIGH);
-  delay(50);
+  delay(150);
   digitalWrite(led1,LOW);
-  delay(50);
+  delay(150);
   digitalWrite(led1,HIGH);
-  delay(50);
+  delay(150);
   digitalWrite(led1,LOW);
-  delay(50);
+  delay(150);
   digitalWrite(led1,HIGH);
-  delay(50);
+  delay(150);
   digitalWrite(led1,LOW);
-  delay(50);
+  delay(150);
   }
 void pide_vias_I() {
   digitalWrite(led2,HIGH);
-  delay(50);
+  delay(150);
   digitalWrite(led2,LOW);
-  delay(50);
+  delay(150);
   digitalWrite(led2,HIGH);
-  delay(50);
+  delay(150);
   digitalWrite(led2,LOW);
-  delay(50);
+  delay(150);
   digitalWrite(led2,HIGH);
-  delay(50);
+  delay(150);
   digitalWrite(led2,LOW);
-  delay(50);
+  delay(150);
   digitalWrite(led2,HIGH);
-  delay(50);
+  delay(150);
   digitalWrite(led2,LOW);
-  delay(50);  
+  delay(150);  
   }
 void noventa_Grados(){
-  myservo.write(80);
-  delay (2000);
+  myservo.write(60);
+  delay(500);
+  myservo.write(90);
 }
 void ciento_ochenta_Grados(){
-  myservo.write(170);
-  delay (2000);
+  myservo.write(130);
+  delay(500);
+  myservo.write(90);
 }
 void FAROS(){
   digitalWrite(led3,HIGH);
@@ -166,15 +175,40 @@ void FAROSNO(){
 void BOCINA(){
   buzzer();
 }
-void BOCINANO(){
-  noTone(BUZZER);
-}
 void buzzer(){
-  for (int i = 0; i < sizeof(melody) / sizeof(int); i++) {
-    int duration = 1000 / noteDurations[i];
-    tone(BUZZER, melody[i], duration);
-    delay(duration * 1.30); // Pequeña pausa entre notas
-    noTone(BUZZER);
+  playNote(Do, t2);
+  playNote(Do, t2);
+  playNote(Do, t2);
+  playNote(Fa, t2);
+  playNote(La, t1);
+  playNote(Do, t2);
+  playNote(Do, t2);
+  playNote(Do, t2);
+  playNote(Fa, t2);
+  playNote(La, t1);
+  playNote(Fa, t2);
+  playNote(Fa, t2);
+  playNote(Mi, t2);
+  playNote(Mi, t2);
+  playNote(Re, t2);
+  playNote(Re, t2);
+  playNote(Do, t2);
+  playNote(Do, t1);
+  playNote(Do, t2);
+  playNote(Do, t2);
+  playNote(Do, t2);
+  playNote(Mi, t2);
+  playNote(Sol, t1);
+  playNote(Do, t2);
+  playNote(Do, t2);
+  playNote(Do, t2);
+  playNote(Mi, t2);
+  playNote(Sol, t1);
+  playNote(DoS, t2);
+  playNote(ReS, t2);
+  playNote(DoS, t2);
+  playNote(Si, t2);
+  playNote(La, t2);
+  playNote(Sol, t2);
+  playNote(Fa, t1);
   }
-  delay(1000); // Pausa entre repeticiones de la melodía
-}
