@@ -21,12 +21,6 @@ int mot_int=6450;
 int time_int=0;
 byte dimersignal = 0;
 
-//Funciones
-void potencia_foco();
-
-//Constructores
- 
-
 void setup() {
   attachInterrupt(digitalPinToInterrupt(cruce_cero),potencia_foco,RISING);
   Serial.begin(9600);
