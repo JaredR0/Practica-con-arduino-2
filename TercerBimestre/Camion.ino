@@ -77,8 +77,6 @@ void loop() {
         break;
         case '3':
         stop1();
-        pide_vias_D();
-        pide_vias_I();
         break;
         case '4':
         pide_vias_D();
