@@ -3,8 +3,6 @@
   Grado:   Quinto Electrónica
   Sección: A
   Curso:   Taller de Electrónica Digital y Reparación de Computadoras I
-  Nombre:  Juan David Tejada Peñuela 
-  Carné:   2022454 2019127 2021206 2019376
   Proyecto: Fin de bimestre Transport Truck
 */
 #include <SoftwareSerial.h>
